@@ -3,6 +3,9 @@
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
 'use strict';
 
+// Functional library
+
+
 var _ = {};
 
 
@@ -21,6 +24,9 @@ var _ = {};
 *   _.identity({a: "b"}) === {a: "b"}
 */
 
+_.identity = function(value) {
+    return value;
+}
 
 /** _.typeOf
 * Arguments:
@@ -42,6 +48,9 @@ var _ = {};
 * _.typeOf([1,2,3]) -> "array"
 */
 
+_.typeof = function() {
+
+}
 
 /** _.first
 * Arguments:
@@ -207,8 +216,30 @@ var _ = {};
 *   3) return the new array
 * Examples:
 *   _.map([1,2,3,4], function(e){return e * 2}) -> [2,4,6,8]
+    _.map({ a: 1, b: 2, c: 3 }, function(e){return e * 2}) -> [2,4,6,8]
 */
 
+_.map = function(collection, func) {
+    const output = [];
+
+    // if collection is an array
+    if (Array.isArray(collection)) {
+        // loop over each item in collection
+        for (let i = 0; i < collection.length; i++) {
+            output.push(func(collection[i], i, collection));
+    
+        }
+    } else { // else it's an object
+        // loop over the collection
+        for (let key in collection) {
+            output.push(func(collection[key], key, collection))
+        }
+
+    }
+    // 
+    return output;
+
+}
 
 /** _.pluck
 * Arguments:
