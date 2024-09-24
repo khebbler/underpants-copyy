@@ -1,7 +1,7 @@
 // This makes the arguments variable behave the way we want it to and a few
 // other things. For more info:
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
-'use strict';
+//'use strict';
 
 // Functional library
 
@@ -48,7 +48,18 @@ _.identity = function(value) {
 * _.typeOf([1,2,3]) -> "array"
 */
 
-_.typeof = function() {
+_.typeOf = function(value) {
+    // checking if value is null
+    if (value === null) {
+        return "null";
+    }
+    // checking if value is an array
+    if (Array.isArray(value)) {
+        return "array";
+    }
+    // returning the type of the rest the values
+    return typeof value;
+
 
 }
 
@@ -69,6 +80,27 @@ _.typeof = function() {
 *   _.first(["a", "b", "c"], 1) -> "a"
 *   _.first(["a", "b", "c"], 2) -> ["a", "b"]
 */
+
+_.first = function(array, number) {
+    // checking if array is not an array
+    if (!Array.isArray(array)) {
+        return [];
+    }
+    // checking if number is not given or not a number
+    if (number === undefined && number !== "number") {
+        // returning the first element in array
+        return array[0]; 
+    }
+    // checking if number is negative
+    if (number < 0) {
+        // returning empty list
+        return [];
+
+    }
+    // otherwise, returning the first number items of array
+    return array.slice(0, number);
+
+}
 
 
 /** _.last
