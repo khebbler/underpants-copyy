@@ -121,6 +121,27 @@ _.first = function(array, number) {
 *   _.last(["a", "b", "c"], 2) -> ["b", "c"]
 */
 
+_.last = function(array, number) {
+    // checking if array is not an array
+    if (!Array.isArray(array)) {
+        return [];
+    }
+    // checking if number is not given or not a number
+    if (number === undefined && number !== "number") {
+        // returning the last element in array
+        return array[array.length - 1]; 
+    }
+    // checking if number is negative
+    if (number < 0) {
+        // returning empty list
+        return [];
+
+    }
+    // otherwise, returning the last number items of array
+    return array.slice(-number);
+
+}
+
 
 /** _.indexOf
 * Arguments:
