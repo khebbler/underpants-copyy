@@ -159,6 +159,18 @@ _.last = function(array, number) {
 *   _.indexOf(["a","b","c"], "d") -> -1
 */
 
+_.indexOf = function(array, value) {
+    // 
+    for (var i = 0; i < array.length; i++) {
+        //
+        if (array[i] === value) {
+            //
+            return i;
+        }
+    }
+    return -1;
+
+}
 
 /** _.contains
 * Arguments:
@@ -174,6 +186,17 @@ _.last = function(array, number) {
 * Examples:
 *   _.contains([1,"two", 3.14], "two") -> true
 */
+
+_.contains = function(array, value) {
+    // Looping through input array
+    for (var i = 0; i < array.length; i++) {
+        // returning true if array contains value
+        if (array[i] === value) return true ? true : false;
+    }
+    // otherwise return false if no value is given
+    return false;
+    
+}
 
 
 /** _.each
@@ -191,6 +214,17 @@ _.last = function(array, number) {
 *   _.each(["a","b","c"], function(e,i,a){ console.log(e)});
 *      -> should log "a" "b" "c" to the console
 */
+
+_.each = function(collection, func) {
+    // checking if collection is an array
+    if (Array.isArray(collection)) {
+        // Looping through collection arary 
+        for (var i = 0; i < collection.length; i++) {
+            // call function once for each element
+            func(collection[i], i, collection);
+        }
+    }
+}
 
 
 /** _.unique
