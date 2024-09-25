@@ -160,14 +160,15 @@ _.last = function(array, number) {
 */
 
 _.indexOf = function(array, value) {
-    // 
+    // Looping through input array
     for (var i = 0; i < array.length; i++) {
-        //
+        // checking if array element is equal to value
         if (array[i] === value) {
-            //
+            // returning the first occurance of value
             return i;
         }
     }
+    // returning -1 if value is not in array
     return -1;
 
 }
@@ -243,6 +244,24 @@ _.each = function(collection, func) {
 *   _.unique([1,2,2,4,5,6,5,2]) -> [1,2,4,5,6]
 */
 
+_.unique = function(array) {
+    // initializing storage array for duplicates removed
+    var removed = [];
+
+    // Looping through input array
+    for (var i = 0; i < array.length; i++) {
+        // 
+        if (_.indexOf(removed, array[i]) === -1) {
+            // adding element to removed array
+            removed.push(array[i])
+        }
+    }
+    // returning removed
+    return removed;
+
+
+}
+
 
 /** _.filter
 * Arguments:
@@ -259,6 +278,23 @@ _.each = function(collection, func) {
 * Extra Credit:
 *   use _.each in your implementation
 */
+
+_.filter = function(array, func) {
+    // initializing storage array for duplicates removed
+    var storage = [];
+
+    // Looping through input array
+    for (var i = 0; i < array.length; i++) {
+        // call function for each element in array (element, index, array)
+        if (func(array[i], i, array)) {
+            // adding element to removed array
+            storage.push(array[i])
+        }
+    }
+    // returning removed
+    return storage;
+
+}
 
 
 /** _.reject
