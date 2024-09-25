@@ -223,6 +223,12 @@ _.each = function(collection, func) {
             // call function once for each element
             func(collection[i], i, collection);
         }
+    } else { // collection is an array
+        // Looping through collection object
+        for (var key in collection) {
+            // calling function once for each element
+            func(collection[key], key, collection);
+        }
     }
 }
 
@@ -360,7 +366,39 @@ _.map = function(collection, func) {
 *   _.every([2,4,6], function(e){return e % 2 === 0}) -> true
 *   _.every([1,2,3], function(e){return e % 2 === 0}) -> false
 */
+/*
+_.every = function(collection, func) {
+    if (Array.isArray(collection)) {
+        if (!func) { // determine if no function was provided
+            for (let i = 0; i < collection.length; i++) {
+                if () { // determine if current item is NOT truthy
+                    // return what
+                }
+            }
 
+        }
+
+    } else { // else it's an is an object
+        if (!func) { // determine if no function was provided
+
+        }
+
+    }
+
+}
+
+_.every([1, 2, 3, 4], function(n){ return n % 2 === 0}); // false (because not every time is even)
+_.every([2, 4, 6], function(n){ return n % 2 === 0}); // true (every item is even)
+_.every({ a: 1, b: 2 }, function(n){ return n > 1});// false (not every item is greater than 1)
+_.every({ a: 3, b: 4 }, function(n){ return n > 1}); /// true (every item is greater than 1)
+
+// 4
+_.every([1, 2, 3]); // true (because every item is truthy)
+_.every([1, undefined, 3]); // false (because one item is falsey)
+_.every({ a: 1, b: 2 }); // true (because all of the values are truthy)
+_.every({ a: null, b: 2}); // false (because of the values if falsey)
+
+*/
 
 /** _.some
 * Arguments:
