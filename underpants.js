@@ -310,6 +310,22 @@ _.filter = function(array, func) {
 *   _.reject([1,2,3,4,5], function(e){return e%2 === 0}) -> [1,3,5]
 */
 
+_.reject = function(array, func) {
+    // initializing storage array for duplicates removed
+    var storage = [];
+
+    // Looping through input array
+    for (var i = 0; i < array.length; i++) {
+        // call function for each element in array (element, index, array)
+        if (!func(array[i], i, array)) {
+            // adding element to removed array
+            storage.push(array[i])
+        }
+    }
+    // returning removed
+    return storage;
+}
+
 
 /** _.partition
 * Arguments:
