@@ -448,14 +448,15 @@ _.pluck = function(array, property) {
 */
 
 _.every = function(collection, func) {
+    // if collection is an array
     if (Array.isArray(collection)) {
-        // determine if no function was provided
+        // if no function was provided
         if (!func) { 
             // looping over collection array
             for (let i = 0; i < collection.length; i++) {
-                // determine if current element is NOT truthy
+                // if current element is NOT truthy
                 if (!collection[i]) { 
-                    // return false
+                    // returning false if not truthy
                     return false;
                 }
             }
@@ -463,34 +464,43 @@ _.every = function(collection, func) {
         } else {
             // looping over collection array
             for (let i = 0; i < collection.length; i++) {
-                //
+                // calling function with current element, index & they array 
                 if (!func(collection[i], i, collection)) {
-                    // 
+                    // return false if func returns false
                     return false;
-
+               
                 }
-
+            
             }
-
-
+       
         }
-
-    } else { // else it's an is an object
-        // determine if no function was provided
+    // otherwise it's an is an object
+    } else { 
+        // if no function was provided
         if (!func) { 
-            // looping over collection object
+            // looping through collection object
             for (let key in collection) {
-                // determine if current element is NOT truthy
+                // checking if current element is NOT truthy
                 if (!collection[key]) {
-                    // return false
+                    // return false if not truthy
                     return false;
                 }
-
+           
             }
-
+        // if function was provided
+        } else {
+            // looping through collection object
+            for (let key in collection) {
+                // calling func with current value, key and object
+                if (!func(collection[key], key, collection)) {
+                    // returning false if func returns false
+                    return false;
+                }
+            }
         }
-
     }
+    // returning true if all elements pass test
+    return true;
 
 }
 
@@ -530,18 +540,25 @@ _.every({ a: null, b: 2}); // false (because of the values if falsey)
 
 _.some = function(collection, func) {
     // checking if collection is an array
-    if (Array.isArray(collection)) {
-        //
-        for (var i = 0; i < collection.length; i++) {
-            //
-            if (collection[i]) {
-                return true;
-            }
-
-        }
-
+  if (Array.isArray(collection)) {
+    // looping through collection array
+    for (let i = 0; i < collection.length; i++) {
+      // if no func is provided checking if the current element is truthy
+      if (!func && collection[i]) return true;
+      // calling func with current element, index, and collection
+      if (func && func(collection[i], i, collection)) return true;
     }
-
+  } else if (typeof collection === 'object' && collection !== null) {
+    // looping through collection object
+    for (let key in collection) {
+      // If no function is provided, check if the current value is truthy
+      if (!func && collection[key]) return true;
+      // calling func with the current value, key and collection
+      if (func && func(collection[key], key, collection)) return true;
+    }
+  }
+  // returning false if none of the elements passed the function test
+  return false;
 }
 
 
@@ -578,7 +595,12 @@ _.some = function(collection, func) {
 *   var data = {a:"one"};
 *   _.extend(data, {b:"two"}); -> data now equals {a:"one",b:"two"}
 *   _.extend(data, {a:"two"}); -> data now equals {a:"two"}
+/home/khebbler/underpants-copyy/test
 */
+
+_.extend = function (object1, ...object2) {
+    return Object.assign(object1, ...object2);
+}
 
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
