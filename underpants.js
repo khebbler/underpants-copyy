@@ -346,6 +346,28 @@ _.reject = function(array, func) {
 }
 */
 
+_.partition = function(array, func) {
+    // initializing storage arrays for truthy and falsey values
+    var truthy = [];
+    var falsey = [];
+
+    // Looping through input array
+    for (var i = 0; i < array.length; i++) {
+        // if the result of calling the function is true
+        if (func(array[i], i, array)) {
+            // adding element to truthy array
+            truthy.push(array[i])
+        // otherwise if false
+        } else {
+            // adding element to falsey array
+            falsey.push(array[i])
+        }
+    }
+    // returning an array made of 
+    return [truthy, falsey]
+
+}
+
 
 /** _.map
 * Arguments:
@@ -397,6 +419,12 @@ _.map = function(collection, func) {
 *   _.pluck([{a: "one"}, {a: "two"}], "a") -> ["one", "two"]
 */
 
+_.pluck = function(array, property) {
+    // an array containing the value of <property> for every element in <array>
+    return _.map(array, function(element) {
+        return element[property];
+    })
+}
 
 /** _.every
 * Arguments:
@@ -418,20 +446,47 @@ _.map = function(collection, func) {
 *   _.every([2,4,6], function(e){return e % 2 === 0}) -> true
 *   _.every([1,2,3], function(e){return e % 2 === 0}) -> false
 */
-/*
+
 _.every = function(collection, func) {
     if (Array.isArray(collection)) {
-        if (!func) { // determine if no function was provided
+        // determine if no function was provided
+        if (!func) { 
+            // looping over collection array
             for (let i = 0; i < collection.length; i++) {
-                if () { // determine if current item is NOT truthy
-                    // return what
+                // determine if current element is NOT truthy
+                if (!collection[i]) { 
+                    // return false
+                    return false;
                 }
             }
+        // if a function was provided
+        } else {
+            // looping over collection array
+            for (let i = 0; i < collection.length; i++) {
+                //
+                if (!func(collection[i], i, collection)) {
+                    // 
+                    return false;
+
+                }
+
+            }
+
 
         }
 
     } else { // else it's an is an object
-        if (!func) { // determine if no function was provided
+        // determine if no function was provided
+        if (!func) { 
+            // looping over collection object
+            for (let key in collection) {
+                // determine if current element is NOT truthy
+                if (!collection[key]) {
+                    // return false
+                    return false;
+                }
+
+            }
 
         }
 
@@ -450,7 +505,7 @@ _.every([1, undefined, 3]); // false (because one item is falsey)
 _.every({ a: 1, b: 2 }); // true (because all of the values are truthy)
 _.every({ a: null, b: 2}); // false (because of the values if falsey)
 
-*/
+
 
 /** _.some
 * Arguments:
@@ -472,6 +527,22 @@ _.every({ a: null, b: 2}); // false (because of the values if falsey)
 *   _.some([1,3,5], function(e){return e % 2 === 0}) -> false
 *   _.some([1,2,3], function(e){return e % 2 === 0}) -> true
 */
+
+_.some = function(collection, func) {
+    // checking if collection is an array
+    if (Array.isArray(collection)) {
+        //
+        for (var i = 0; i < collection.length; i++) {
+            //
+            if (collection[i]) {
+                return true;
+            }
+
+        }
+
+    }
+
+}
 
 
 /** _.reduce
