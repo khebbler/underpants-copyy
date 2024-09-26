@@ -539,26 +539,7 @@ _.every({ a: null, b: 2}); // false (because of the values if falsey)
 */
 
 _.some = function(collection, func) {
-    // checking if collection is an array
-  if (Array.isArray(collection)) {
-    // looping through collection array
-    for (let i = 0; i < collection.length; i++) {
-      // if no func is provided checking if the current element is truthy
-      if (!func && collection[i]) return true;
-      // calling func with current element, index, and collection
-      if (func && func(collection[i], i, collection)) return true;
-    }
-  } else if (typeof collection === 'object' && collection !== null) {
-    // looping through collection object
-    for (let key in collection) {
-      // If no function is provided, check if the current value is truthy
-      if (!func && collection[key]) return true;
-      // calling func with the current value, key and collection
-      if (func && func(collection[key], key, collection)) return true;
-    }
-  }
-  // returning false if none of the elements passed the function test
-  return false;
+    
 }
 
 
@@ -599,6 +580,7 @@ _.some = function(collection, func) {
 */
 
 _.extend = function (object1, ...object2) {
+
     return Object.assign(object1, ...object2);
 }
 
