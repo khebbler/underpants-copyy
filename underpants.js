@@ -539,7 +539,26 @@ _.every({ a: null, b: 2}); // false (because of the values if falsey)
 */
 
 _.some = function(collection, func) {
-    
+    // if not function was provided
+    if (!func) {
+        //
+        for (let key in collection) {
+            //
+            if (collection[key]) {
+                return true;
+            } else {
+                return false;
+            }
+        } 
+    }
+    if (Array.isArray(collection)) {
+        // 
+        for (let i = 0; i < collection.length; i++) {
+            if (func()) {
+                
+            }
+        }
+    }
 }
 
 
@@ -563,6 +582,33 @@ _.some = function(collection, func) {
 */
 
 
+
+_.reduce = function(array, func, seed) {
+    let output;
+    // determine if seed was not provided a value
+    if (seed === undefined){
+        // assign output to the first item in the array
+        output = array[0];
+        for (let i = 1; i < array.length; i++) {
+            // reassign output to the result of invoking callback func
+            output = func(output, array[i], i);
+        }
+    } else { // else there was a seed value
+        output = seed;
+        // Looping over array
+        for (let i = 0; i < array.length; i++) {
+            // invoking callback func
+            output = func(output, array[i], i);
+        }
+    }
+    // returning output
+    return output;
+
+}
+
+
+
+
 /** _.extend
 * Arguments:
 *   1) An Object
@@ -576,13 +622,17 @@ _.some = function(collection, func) {
 *   var data = {a:"one"};
 *   _.extend(data, {b:"two"}); -> data now equals {a:"one",b:"two"}
 *   _.extend(data, {a:"two"}); -> data now equals {a:"two"}
-/home/khebbler/underpants-copyy/test
+
 */
 
 _.extend = function (object1, ...object2) {
 
     return Object.assign(object1, ...object2);
 }
+
+
+//_.extend({ a: 1 }, { b: 1 }, { c: 1 }); // { a: 1, b: 1, c: 1 }
+//       target     copyFrom  copyFrom
 
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
